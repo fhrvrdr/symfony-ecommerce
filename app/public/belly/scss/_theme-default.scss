@@ -1,0 +1,28 @@
+/* Theme Color Chocolate */ 
+body.belly-color-chocolate{
+
+    $primary-color:#B3936D;
+
+
+    .theme-btn,.theme-btn-outlined:hover,.belly-product .hover-btns.btn-type-2 .single-btn:hover,.testimonial-slider .slick-dots li:hover,.testimonial-slider .slick-dots li.slick-active,.belly-mini-blog .blog-badge,.count-input-block button:hover,.count-input-block button:hover,.social-links.links-rounded-bg .single-social:hover{
+        background: $primary-color;
+    }
+    .theme-btn,.theme-btn-outlined:hover,.belly-product .hover-btns.btn-type-2 .single-btn:hover,.testimonial_client-profile .client-img,.count-input-block button:hover{
+        border-color: $primary-color;
+    }
+    .text-primary,.belly-bredcrumb-section .breadcrumb li:last-child a{
+        color: $primary-color;
+    }
+    .main-menu .has-dropdown.mega-menu .menu-title,.main-menu .has-dropdown.mega-menu .dropdown__single-column > li > a:hover,.main-menu .has-dropdown:hover > a,.option-box .option-title a:hover,.single-option li:hover a, .single-option li:hover button,.option-list .option__single-list:hover,.cart-box .cart-product .product-details--price,.cart-box .cart-product .product-details--title:hover,.belly-product .hover-btns.btn-type-2 .single-btn,.belly-product .product__price,.belly-product .product__price,.testimonial_client-profile .client-details,.belly-mini-blog .blog-content .blog-subtitle,.site-search .search-box button,.sticky-header .menu-item:hover > a,.footer-list a:hover,.sticky-header .single-option:hover .single-option_icon,a.sortting-btn.active{
+        color: $primary-color;
+    }
+    .main-menu .has-dropdown.mega-menu .menu-title,.sticky-header .single-option:hover .single-option_icon,.main-menu .has-dropdown.normal-dropdown li > a:hover{
+        @include desktops{
+                color: $primary-color;
+        }
+    }
+    
+    .welcome__description p{
+        color: #847676
+    }
+}

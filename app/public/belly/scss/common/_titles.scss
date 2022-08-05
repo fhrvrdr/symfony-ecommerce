@@ -1,0 +1,156 @@
+.section-title{
+    text-align: center;
+    margin-top: -2px;
+    margin-bottom:35px; 
+    padding-bottom: 30px;
+    color: #ffffff;
+    h2{
+        font-size: 27px;
+        margin: 0;
+        font-weight: 400;
+        text-transform: capitalize;
+        padding: 0 0 13px;
+        position: relative;
+        display: inline-block;
+        font-family: 'Prata', serif;
+        @include tablet{
+            font-size: 35px;   
+        }
+    }
+    p{
+        margin: 0 0 30px;
+        font-size: 14px;
+        color: #e4e4e4;
+        font-weight: 300;
+        font-style: italic;
+        padding: 0 15px;
+        @include mx-mobile-xs{
+            margin: 0 0 45px;
+        }
+        @include desktops{
+            padding: 0 150px;
+        }
+    } 
+    &.text-black{
+        h2{
+            color: $color-bunker-2;
+        }
+        p{
+            color: #847676;
+        }
+    }
+}
+
+.title-sm-shadowlight{
+    @include title(18px!important,400,$font-shadow-cursive);
+    // color: #fff!important;
+    @include tablet{
+        font-size: 30px!important;
+    }
+}
+.title-xl-arvo{
+    @include title(35px!important,$font-arvo);
+    @include tablet{
+        font-size: 75px!important;
+    }
+    @include desktops{
+        font-size: 90px!important;
+    }
+    &--bold{
+        @include title(35px!important,700,$font-arvo);
+        @include tablet{
+            font-size: 75px!important;
+        }
+        @include desktops{
+            font-size: 80px!important;
+        }
+        @include large-desktops{
+            font-size: 90px!important;
+        }
+    }
+    
+}
+.title-lg-arvo{
+    @include title(35px!important,$font-arvo);
+    @include tablet{
+        font-size: 75px!important;
+    }
+    @include desktops{
+        font-size: 80px!important;
+    }
+    
+    &--bold{
+        @include title(35px!important,700,$font-arvo);
+        @include tablet{
+            font-size: 75px!important;
+        }
+        @include desktops{
+            font-size: 80px!important;
+        }
+       
+    }
+    
+}
+/* Title Separators */
+.title-seperator--1{
+    padding-bottom: 35px;
+    @include title-sep{
+        background-image:url(../image/separators/title-sep--chocolate.png); 
+        background-position: center;
+        height: 6px;
+    }
+    &.sep-left{
+        &::before{
+            background-position: left;
+        }
+    }
+}
+.title-seperator--2{
+    @include title-sep{
+        background-image:url(../image/separators/title-sep--red.png); 
+        background-position: center;
+        height: 60px;
+    }
+}
+.title-seperator--3{
+    @include title-sep{
+        background-image:url(../image/separators/title-sep--green.png); 
+        background-position: center;
+        height: 60px;
+    }
+} 
+/* Section Title Separators */ 
+.section-title-sep{
+    &-1{
+        @include title-sep{
+            background-image:url(../image/separators/section-title-sep--1.png); 
+            background-position: center;
+            height: 60px;
+        }
+    }
+    &-2{
+        @include title-sep{
+            background-image:url(../image/separators/section-title-sep--2.png); 
+            background-position: center;
+            height: 60px;
+        }
+    }
+    &-3{
+        @include title-sep{
+            background-image:url(../image/separators/section-title-sep--4.png); 
+            background-position: center;
+            height: 60px;
+        }
+    }
+    &-4{
+        @include title-sep{
+            background-image:url(../image/separators/section-title-sep--3.png); 
+            background-position: center;
+            height: 60px;
+        }
+    }
+}
+
+.title-font{
+    font-family: 'Prata', serif;
+}

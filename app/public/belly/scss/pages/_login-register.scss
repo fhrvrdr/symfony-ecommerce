@@ -1,0 +1,170 @@
+
+/*=============================================
+=            17. Login Register            =
+=============================================*/
+
+
+
+/*-- Login Title --*/
+.login-title {
+    font-size: 20px;
+    line-height: 23px;
+    // text-decoration: underline;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 30px;
+    @extend .title-font;
+    color: $primary-color;
+}
+
+/*-- Login Form --*/
+.login-form {
+    color: #d4d4d4;
+    background-color: #14191e;
+    padding: 30px;
+    box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1); 
+    
+    @include mx-tablet{
+        padding: 15px;
+    }
+    & label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+    
+    & .nice-select {
+        width: 100%;
+        background-color: transparent; 
+        border: 1px solid #565f69;
+        border-radius: 0;
+        line-height: 23px;
+        padding: 10px 20px;
+        font-size: 14px;
+        height: 45px;
+        color: #d4d4d4;
+        margin-bottom: 15px;
+        &::after {
+            width: 6px;
+            height: 6px;
+            border-width: 1px;
+            right: 20px;
+            border-color: #565f69;
+        }
+        & .current {
+            color: $text-color;
+            display: block;
+            line-height: 23px;
+        }
+        & .list {
+            width: 100%;
+        }
+    }
+    
+    & input {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid #565f69;
+        border-radius: 0;
+        line-height: 23px;
+        padding: 10px 20px;
+        font-size: 14px;
+        color: text-color;
+        margin-bottom: 15px;
+        color: #b2b2b2;
+        &[type="checkbox"] {
+            width: auto;
+        }
+        &:focus{
+            border-color: $primary-color; 
+            box-shadow: none;
+            outline: none;
+        }
+    }
+    
+    & .check-box {
+        float: left;
+        margin-right: 70px;
+        
+        &:last-child {
+            margin-right: 0;
+        }
+        
+        & input[type="checkbox"] {
+            display: none;
+            
+            & + label {
+                position: relative;
+                padding-left: 30px;
+                line-height: 20px;
+                font-size: 14px;
+                font-weight: 400;
+                color: #d4d4d4;
+                margin: 0;
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    border: 2px solid #565f69;
+                    content: "";
+                    transition: all 0.3s ease 0s;
+                }
+                &::after {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                    content: "\f00c";
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: 12px;
+                    line-height: 20px;
+                    opacity: 0;
+                    color: #d4d4d4;
+                    width: 20px;
+                    text-align: center;
+                    transition: all 0.3s ease 0s;
+                }
+            }
+            
+            &:checked + label {
+                &::before {
+                    border: 2px solid #565f69;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    
+}
+
+/*-- Place Order --*/
+.register-button {
+    display: block;
+    margin-top: 40px;
+    width: 140px;
+    border-radius: 0;
+    height: 36px;
+    border: none;
+    line-height: 24px;
+    padding: 6px 20px;
+    float: left;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: $white;
+    border-radius: 3px;
+    // &:hover{
+    //     // background-color: $primary-color;
+    // }
+}
+
+
+/*=====  End of 17. Login Register  ======*/
+

@@ -1,0 +1,29 @@
+
+
+/* Theme Color Red*/ 
+body.belly-color-red{
+    $primary-color:$primary-color-2;
+    .theme-btn,.theme-btn-outlined:hover,.belly-product .hover-btns.btn-type-2 .single-btn:hover,.testimonial-slider .slick-dots li:hover,.testimonial-slider .slick-dots li.slick-active,.belly-mini-blog .blog-badge,.mini-items-slider .slick-arrow:hover,.social-links.links-rounded-bg .single-social:hover,.theme-btn-outlined--type-2:hover,#scrollUp{
+        background: $primary-color;
+    }
+    .theme-btn,.theme-btn-outlined:hover,.belly-product .hover-btns.btn-type-2 .single-btn:hover,.testimonial_client-profile .client-img,.mini-items-slider .slick-arrow:hover,.theme-btn-outlined--type-2:hover{
+        border-color: $primary-color;
+    }
+    .main-menu .has-dropdown.mega-menu .dropdown__single-column > li > a:hover,.option-box .option-title a:hover,.single-option li:hover a, .single-option li:hover button,.option-list .option__single-list:hover,.cart-box .cart-product .product-details--price,.cart-box .cart-product .product-details--title:hover,.belly-product .hover-btns.btn-type-2 .single-btn,.belly-product .product__price,.belly-product .product__price,.testimonial_client-profile .client-details,.belly-mini-blog .blog-content .blog-subtitle,.site-search .search-box button,.belly-mini-blog .blog-content .blog-title:hover,.welcome__description .welcome__title--sm,.hero-slider-wrapper .slick-arrow:hover,.sticky-header .menu-item:hover > a,.footer-list a:hover{
+        color: $primary-color;
+    }
+    .text-primary,a.sortting-btn.active{
+        color: $primary-color!important;
+    }
+    .main-menu .has-dropdown.mega-menu .menu-title,.sticky-header .single-option:hover .single-option_icon,.main-menu .has-dropdown.normal-dropdown li > a:hover{
+        @include desktops{
+                color: $primary-color;
+        }
+    }
+    
+    .sticky-header .menu-item:hover > .menu-link{
+        @include desktops{
+                color: $primary-color!important;
+        }
+    }
+}

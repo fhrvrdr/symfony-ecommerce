@@ -1,0 +1,217 @@
+.section-padding{
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+@for $i from 3 through 30 {
+    .space-db--#{5 * $i}{margin-bottom: -5px *$i;}
+}
+@for $i from 6 through 30 {
+    .space-dt--#{5 * $i}{margin-top: -5px *$i;}
+}
+
+
+.mb{
+    &--40{
+        margin-bottom: 40px;
+    }
+    &--25{
+        margin-bottom: 25px;
+    }
+    &--15{
+        margin-bottom: 15px;
+    }
+}
+
+
+$extra-device: 'only screen and (min-width: 1600px) and (max-width: 1919px)';
+$laptop-device: 'only screen and (min-width: 1200px) and (max-width: 1599px)';
+$lg-layout: 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md-layout:'only screen and (min-width: 768px) and (max-width: 991px)';
+$sm-layout:'only screen and (max-width: 767px)';
+$large-mobile: 'only screen and (max-width: 575px)';
+/* container 450px*/
+
+
+/*-- Padding Top --*/
+@for $i from 1 through 30 {
+    .pt--#{5 * $i}{padding-top: 5px *$i;}
+}
+// Large Device only
+@for $i from 1 through 30 {
+    @include desktops{
+        .pt-lg--#{5 * $i}{padding-top: 5px *$i!important;}
+    }
+}
+
+@media #{$large-mobile}{
+    @for $i from 1 through 10 {
+        .pt_sm--#{5 * $i}{padding-top: 5px *$i;}
+    }
+}
+
+
+
+/*-- Padding Bottom --*/
+@for $i from 1 through 30 {
+    .pb--#{5 * $i}{padding-bottom: 5px *$i;}
+}
+
+@media #{$large-mobile}{
+    @for $i from 1 through 10 {
+        .pb_sm--#{5 * $i}{padding-bottom: 5px *$i;}
+    }
+}
+
+
+
+/*-- Padding Left --*/
+@for $i from 1 through 30 {
+    .pl--#{5 * $i}{padding-left: 5px *$i;}
+}
+@for $i from 1 through 30 {
+    @include desktops{
+        .pl-lg--#{5 * $i}{padding-left: 5px *$i;}
+    }
+}
+@for $i from 1 through 30 {
+    @include desktops{
+        .pr-lg--#{5 * $i}{padding-right: 5px *$i;}
+    }
+}
+@for $i from 1 through 30 {
+    @include desktops{
+        .mt-lg--#{5 * $i}{margin-top: 5px *$i;}
+    }
+}
+.pl--5 {
+    padding-left: 5px !important;
+}
+@media #{$large-mobile}{
+    @for $i from 1 through 10 {
+        .pl_sm--#{5 * $i}{padding-left: 5px *$i;}
+    }
+}
+
+
+
+/*-- Padding Right --*/
+@for $i from 1 through 30 {
+    .pr--#{5 * $i}{padding-right: 5px *$i;}
+}
+
+@media #{$large-mobile}{
+    @for $i from 1 through 10 {
+        .pr_sm--#{5 * $i}{padding-right: 5px *$i;}
+    }
+}
+
+
+/*-- Margin Top --*/
+@for $i from 1 through 20 {
+    .mt--#{5 * $i} {
+        margin-top: 5px *$i;
+    }
+}
+
+@media #{$md-layout}{
+    .md-mt--30{
+        margin-top: 30px;
+    }
+}
+
+
+@media #{$sm-layout}{
+    .sm-mt--30{
+        margin-top: 30px;
+    }
+}
+
+
+@media #{$large-mobile}{
+    .lr-mt--30{
+        margin-top: 30px;
+    }
+}
+
+
+/*-- Margin Bottom --*/
+@for $i from 1 through 20 {
+    .mb--#{5 * $i} {
+        margin-bottom: 5px *$i;
+    }
+}
+
+
+/*-- Margin Bottom --*/
+@for $i from 1 through 20 {
+    .ptb--#{5 * $i} {
+        padding: 5px *$i 0;
+    }
+}
+
+
+
+
+
+/*-- Padding Top Bottom --*/
+
+.section-pt-xl{
+    padding-top: 110px;
+    @media #{$sm-layout}{
+        padding-top: 55px;
+    }
+}
+
+.section-pb-xl{
+    padding-bottom: 120px;
+    @media #{$sm-layout}{
+        padding-bottom: 60px;
+    }
+}
+
+.section-ptb-xl {
+    padding: 120px 0;
+    @media #{$sm-layout} {
+        padding: 60px 0;
+    }
+}
+/* Paddings */
+ 
+.mb-30{
+    margin-bottom: 30px;
+}
+
+   .section-padding{
+       padding-top: 60px;
+       padding-bottom: 60px;
+       @include desktops{
+           padding-top: 90px;
+           padding-bottom: 90px;
+       }
+   }
+
+/* No gutters */
+.no-gutters-lg {
+    @include desktops{
+     > .col,
+     > [class*="col-"] {
+       padding-right: 0;
+       padding-left: 0;
+     }
+    }
+    @include large-desktops{
+     > .col,
+     > [class*="col-"] {
+       padding-right: 0;
+       padding-left: 0;
+     }
+    }
+    @include extra-large-desktops{
+     > .col,
+     > [class*="col-"] {
+       padding-right: 0;
+       padding-left: 0;
+     }
+    }
+   }    

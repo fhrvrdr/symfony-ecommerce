@@ -1,0 +1,210 @@
+
+/* Single Product */
+
+.belly-product--details{
+    padding: 0;
+    .product__caption{
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .product-description{
+        text-align: left;
+
+        &--breif{
+            color: #b2b2b2;
+            padding-top:30px;
+            border-top: 1px solid #29323b;
+            margin-top:30px;   
+        }
+    }
+    .rating-widget{
+        padding-bottom: 15px;
+        .single-rating{
+            font-size: 15px;
+        }
+    }
+    .product__price{
+        font-size: 24px;
+        line-height: 26px;
+    }
+    .product-description--list{
+        color: #b2b2b2;
+        p{
+            margin-bottom: 5px;
+        }
+    }
+    &:hover{
+        box-shadow: none;
+    }
+    .product-buttons--group{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -7px;
+    .single-btn-block{
+        margin-left: 7px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        a{
+            height: 45px;
+            @include inline-flex(center);
+            text-align: center;
+            
+        }
+        input{
+            min-width: 149px;
+            height: 45px;
+            text-align: center;
+            background: #28323c;
+            border:none;
+            appearance: none!important;
+            color: #fff;
+            &:focus,&:hover{
+                appearance: none;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        &.btn-big{
+            width: 60%;
+            a{
+                width: 100%;
+            }
+        }
+        .theme-btn{
+            padding: 0 50px;
+        }
+        
+    }
+    
+    }
+    .product__image.left-gallery{
+        @include tablet{
+            display: flex;
+            .product-image-main{
+                @include tablet{
+                    order: 1;
+                    padding-left: 15px;
+                }
+            }
+        }
+        .product-view-slider{
+            @include tablet{
+                width: 500px;
+            }
+        }
+    }
+    &.product-details--page{
+        .product-image-main{
+            position: relative!important;
+            @include mx-mobile-xs{
+                .zoomWrapper{
+                    height: 300px!important;
+                }
+            }
+            @include mx-tablet{
+                .zoomWrapper{
+                    height: 300px!important;
+                }
+            }
+        }
+    }
+    .product-image-thumb{
+        .single-thumb-image {
+            border: 1px solid #29323b;
+            margin-bottom: 30px;
+        }
+    }
+}
+/* Product zoom effect Mobile Control*/ 
+.zoomWindow{
+    @include mx-mobile-xs{
+        display: none!important;
+        visibility: hidden!important;
+    }
+    @include mx-mobile{
+        visibility: hidden!important;
+    }
+}
+
+
+
+
+/*Product View Zoom with Gallary Css*/
+
+.product-view-slider{
+    margin:7px -7px 0 ;
+    button.slick-arrow {
+        color: #5a6067;
+        position: absolute;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 33;
+        opacity: 0;
+        transition: .4s;
+        padding: 5px;
+        &.slick-next{
+            left: auto;
+            right: -10px;
+        }
+    }
+    &:hover{
+        button.slick-arrow{
+            opacity: 1;
+        }
+    }
+}
+.product-view-vertical-slider{
+    margin: -7px 0; 
+    .gallary-item{
+        margin: 7px 0 ;
+    }
+}
+.gallary-item{
+    border: 2px solid transparent;
+    margin: 0 7px;
+    border-radius: 3px;
+    &.active,&:hover{
+        border-color: #29323b;
+    }
+}
+/* Single Product Review Tab*/ 
+.belly-review-tab{
+    .nav-tabs{
+        justify-content: center;
+        font-weight: 500;
+        font-size: 18px;
+        text-transform: capitalize;
+        border: none;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: $primary-color;
+        background-color: transparent;
+        border-color: transparent;
+
+    }
+    .nav-link{
+        font-family: $font-prata;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: capitalize;
+        border: 0;
+        border-radius: 0;
+        margin: 0;
+        padding: 0 30px;
+        @include mx-mobile-xs{
+            padding: 0 12px;
+        }
+    }
+    .tab-content .tab-pane {
+        padding: 25px 0 0;
+        border: 0;
+        font-size: 14px;
+        color: #b2b2b2;
+        line-height: 28px;
+    }
+}

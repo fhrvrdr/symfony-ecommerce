@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('belly/plugins/bootstrap/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('belly/plugins/fontawesome-free/css/all.min.css') }}"/>
+    <link href="{{ asset('belly/plugins/ion-font/css/ionicons.min.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('belly/css/plugins.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('belly/css/main.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
+
+{% block body_script %}
+    <script src="{{ asset('belly/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('belly/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('belly/js/ajax-mail.js') }}"></script>
+    <script src="{{ asset('belly/js/plugins.js') }}"></script>
+    <script src="{{ asset('belly/js/custom.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,152 @@
+<header class="site-header initial-static header-1">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div
+                    class="col-xl-2 col-lg-3 col-md-3 offset-md-1 offset-lg-0 col-6 order-md-2"
+            >
+                <!-- Header Logo -->
+                <div class="site-brand text-lg-center">
+                    <a href="index.html" class="brand_logo">
+                        <img src="image/main-logo.png" alt=""/>
+                    </a>
+                </div>
+            </div>
+
+            <div
+                    class="col-xl-5 col-lg-5 col-md-4 col-12 order-md-1 order-3 mobile-menu"
+            >
+                <!-- Main Menu Start -->
+                <div class="mean-wrapper">
+                    <nav class="mean-active">
+                        <ul class="main-menu">
+                            <li class="menu-item has-dropdown normal-dropdown"><a href="#"
+                                                                                  class="menu-link"><span>Home</span>
+                                    <i class="ion-md-arrow-dropdown"></i></a>
+                                <ul class="dropdown-menu-custom ">
+                                    {% for category in categories %}
+                                        {% if category.parent == null %}
+                                            <li><a href="#" class="link dropdown-link">{{ category.name }}</a></li>
+                                            {% for subcategory in category.children %}
+                                                <li class="ml-3"><a href="">{{ subcategory.name }}</a></li>
+                                                {% for lastcategory in subcategory.children %}
+                                                    <li class="ml-5"><a href="">{{ lastcategory.name }}</a></li>
+
+                                                {% endfor %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+
+                            <li class="menu-item has-dropdown normal-dropdown">
+                                <a href="contact.html" class="link menu-link">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-xl-5 col-lg-4 col-md-4 col-6 order-md-3 order-2">
+                <!-- Header Right Sidebar -->
+                <div class="header-right-options">
+                    <div class="single-option site-search">
+                        <button class="slide-down--btn single-option_icon">
+                            <i class="icon ion-md-search"></i>
+                        </button>
+                        <div class="slide-down--item">
+                            <div class="option-box search-box">
+                                <input type="text" placeholder="Search" class="form-control"/>
+                                <button><i class="icon ion-md-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-option">
+                        <button class="search-btn single-option_icon slide-down--btn">
+                            <i class="icon ion-md-apps"></i>
+                        </button>
+                        <div class="slide-down--item">
+                            <div class="option-box currency-box">
+                                <div class="single-option-box">
+                                    <h4 class="option-title">MY ACCOUNT</h4>
+                                    <ul class="option-list">
+                                        <li>
+                                            <a href="refister.html" class="option__single-list">
+                                                Register
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="login.html" class="option__single-list">
+                                                Login
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="option__single-list">
+                                                Shopping Cart
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="checkout.html" class="option__single-list">
+                                                Checkout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-option">
+                        <button class="cart-btn single-option_icon slide-down--btn">
+                            <i class="icon ion-md-cart"></i>
+                            <span class="item-count">1</span>
+                        </button>
+                        <div class="slide-down--item">
+                            <div class="option-box cart-box">
+                                <ul class="cart-items">
+                                    <li class="single-cart">
+                                        <div class="cart-product">
+                                            <div class="cart-product__img">
+                                                <img
+                                                        src="image/products/cart-product-img-1.jpg"
+                                                        alt="Selected Products"
+                                                />
+                                            </div>
+                                            <div class="product-details">
+                                                <a href="" class="product-details--title">
+                                                    Ras Neque Metus</a
+                                                >
+                                                <span class="product-details--quantity">Qty:1</span>
+                                                <h5 class="product-details--price">$120.00</h5>
+                                                <button class="product-btn--delete">
+                                                    <i class="icon ion-md-close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="single-cart price-total">
+                                        <div class="cart-product cart-product__subtotal">
+                                            <div class="single-total">
+                                                Sub-Total:
+                                                <span class="product-details--price">$120.00</span>
+                                            </div>
+                                            <div class="single-total">
+                                                Total:
+                                                <span class="product-details--price">$120.00</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="cart-buttons">
+                                    <a href="cart.html" class="theme-btn-outlined">View Cart</a>
+                                    <a href="checkout.html" class="theme-btn-outlined"
+                                    >Check Out</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

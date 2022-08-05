@@ -1,0 +1,50 @@
+/* #####++++ Welcome Section ++++####*/ 
+
+.welcome__description{
+    // padding-top: 90px;
+    .welcome__title{
+        &--sm{
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: $primary-color;
+            text-transform: capitalize;
+            font-weight: 400;
+            margin: 0;
+        }
+        &--mid{
+            font-size: 36px;
+            color: #fff;
+            font-family: 'Prata', serif;
+            margin: 10px 0 35px;
+            text-transform: capitalize;
+            font-weight: 400;
+            @include mobile-xs{
+                margin: 10px 0 20px;
+            }
+            @include mobile{
+                margin: 10px 0 20px;
+            }
+        }
+    }
+    p{
+        font-size: 14px;
+        color: $text-color;;
+        font-style: italic;
+        margin-bottom:30px;
+        line-height: 22px;
+        font-weight: 300;
+        padding: 0 15px;
+    }
+    .welcome_sig-image{
+        margin-top: 20px;
+    }
+    &.text-dark{
+        p{
+          color:  #6d6666;
+        }
+    }
+    .img-border-bottom{
+        padding-bottom: 40px;
+        border-bottom: 1px solid #ededed;
+    }
+}  

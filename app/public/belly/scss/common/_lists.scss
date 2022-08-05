@@ -1,0 +1,49 @@
+/*========= Belly lists========*/ 
+
+/* Social Links List */
+.social-links{
+    color: #999999;
+    margin-bottom: -10px;
+    display: flex;
+        justify-content: center;
+        @include mobile{
+            justify-content: flex-start;
+        }
+    a,.single-social{
+        color: inherit;
+    }
+    .single-social{
+        font-weight: 400;
+        padding: 0;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        @include mobile{
+            margin-right: 10px;
+        }
+        @include tablet{
+            margin-right: 10px;
+        }
+        &:hover{
+            color: #fff;
+        }
+        
+    }
+    &.links-rounded-bg{
+        .single-social{
+            background: #1e252e;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 100%;
+            @include desktops{
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+            }
+            &:hover{
+                background: #ac8d6a;
+            }
+        }
+    }
+}

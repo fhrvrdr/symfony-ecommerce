@@ -1,0 +1,177 @@
+
+/* Count Widget*/
+.count-input-block{
+    display: flex;
+    input{
+        height: 45px;
+        text-align: center;
+        background: #28323c;
+        border: none;
+        color: #fff;
+        &:focus{
+            background: #28323c;
+            outline: none;
+            border-color: transparent;
+            box-shadow: none; 
+            color: #fff;
+        }
+    }
+    .count-input-btns{
+        margin-left: 5px;
+    }
+    button{
+        display: block;
+        height: 20px;
+        border: none;
+        box-shadow: none;
+        text-align: center;
+        width: 20px;
+        font-size: 14px;
+        border-radius: 3px;
+        border: 0;
+        background: #28323c;
+        padding: 0;
+        color: #a6a6a6;
+        margin-bottom:5px; 
+        transition: .4s;
+        &:hover{
+            background-color: $primary-color;
+            color: #fff; 
+        }
+    }
+} 
+
+.product-list-group{
+    li{
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: 2px solid #29323b;
+        &:last-child{
+            border-bottom: 0;
+        }
+    }
+    .single-product-list{
+        display: flex;
+        align-items: center;
+        @include mx-mobile-xs{
+            flex-wrap: wrap;
+            margin-bottom:-10px; 
+            padding-top: 30px;
+            .product-image,.product-name,.count-input-block,.product-price{
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .product-image{
+        width: 65px;
+        border: 2px solid #29323b;
+    }
+    .product-name{
+        color: #b2b2b2;
+        margin-right: 40px;
+    }
+    .product-image,.count-input-block{
+        margin-right: 15px;
+    }
+    .count-input-block{
+        min-width: 150px;
+    }
+    .product-price{
+        font-weight: 500;
+        font-size: 18px;
+        color: $primary-color;
+    }
+}
+
+/* Shop View Type Toolbar */ 
+.shop-toolbar{
+    padding-right: 15px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    a.sortting-btn {
+        font-size: 18px;
+        margin-right: 10px;
+        color: rgba(232, 232, 232, 0.43);
+        &:hover{
+            color: $primary-color;
+        }
+        &.active{
+            color: $primary-color;
+        }
+    }
+    .sorting-selection{
+        #input-sort, #input-limit {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            font-size: 14px;
+            color: #b2b2b2;
+            font-weight: 300;
+            text-align: center;
+            height: 52px;
+            border: 0;
+        }
+    }
+
+}
+
+
+/*List Vewing Toolbar*/
+.shop-product-wrap.with-pagination.list [class*="col"] {
+    flex: 100%;
+    max-width: 100%;
+    .product-view--list{
+        border-bottom: 1px solid #29323b;
+        &.product-style-2{
+            border-bottom: 0;
+        }
+    }
+    &:last-child{
+        border-bottom: 0;
+
+        &.mb-30{
+            // margin-bottom: 0;
+        }
+    }
+} 
+
+/* Pagination */
+.pagination-widget{
+    color: #b2b2b2;
+    border-bottom: 1px solid #29323b;
+    border-top: 1px solid #29323b;
+    @include mx-mobile-xs{
+        text-align: center;
+        // padding-bottom: 20px;
+    }
+    @include mobile{
+        text-align: center;
+        // padding-bottom: 20px;
+    }
+    @include tablet{
+        text-align: center;
+        padding-bottom: 0px;
+    }
+    p{
+        color: inherit;
+        margin-bottom: 15px;
+        margin-top: 20px;
+    }
+}
+.site-pagination{
+    margin-bottom: 15px;
+    margin-top: 20px;
+    
+    a{
+        padding:0 5px;
+        color: inherit;
+        font-size: 15px;
+        &:hover{
+            color: $primary-color;
+        }
+    }
+    
+} 
+
+

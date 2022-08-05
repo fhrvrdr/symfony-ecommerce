@@ -1,0 +1,79 @@
+// Contact Area
+#googleMap {
+    height: 550px;
+    width: 100%;
+}
+
+.ct_title {
+    color: $text-color;
+    font-weight: 500;
+    margin-bottom: 15px;
+    @extend .title-font;
+}
+
+.ct_address {
+    p {
+        color: $text-color;
+        line-height: 28px;
+        margin-bottom: 35px;
+        font-size: 14px;
+    }
+}
+
+.address_wrapper {
+    .address {
+        display: flex;
+        margin-bottom: 15px;
+        .icon {
+            min-width: 35px;
+            i {
+                color: $text-color;
+                font-size: 22px;
+            }
+        }
+        .contact-info-text {
+            p {
+                color: $text-color;
+                margin: 0;
+                font-size: 14px;
+                span {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+.contact_form {
+    .input_box {
+        input {
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+            border: 1px solid #dddddd;
+            border-radius: 3px;
+            color: #252525;
+            height: 45px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            text-transform: capitalize;
+            width: 100%;
+        }
+    }
+    textarea {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        border-radius: 3px;
+        height: 150px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+p.form-messege{
+    margin-top: 20px;
+    &.success {
+        color: green;
+    }
+    &.error {
+        color: red;
+    }
+}
