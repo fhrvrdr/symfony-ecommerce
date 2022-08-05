@@ -16,6 +16,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Doctrine\Persistence\ManagerRegistry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -47,7 +49,7 @@ class ProductCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('name'),
-            TextField::new('description'),
+            TextEditorField::new('description'),
             IntegerField::new('price'),
             IntegerField::new('stock'),
             // Slug Sonuna Unique rakam ekle

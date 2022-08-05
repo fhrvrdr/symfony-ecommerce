@@ -27,19 +27,19 @@ class ProductController extends AbstractController
     {
         $categories = $this->entityManager->getRepository(Category::class)->findAll();
         $prodcuts = $this->entityManager->getRepository(Product::class)->findAll();
-        return $this->render('client/home/index.html.twig', [
+        return $this->render('client/product/index.html.twig', [
             'categories' => $categories,
             'products' => $prodcuts,
         ]);
     }
 
-    #[Route('/{slug}', name: 'product_show', methods: 'GET')]
+    #[Route('/products/{slug}', name: 'product_show', methods: 'GET')]
     public function show($slug): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBy([
             'slug' => $slug
         ]);
-        return $this->render('client/home/show.html.twig', [
+        return $this->render('client/product/show.html.twig', [
             'product' => $product,
         ]);
     }
