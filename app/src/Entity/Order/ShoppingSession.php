@@ -20,8 +20,8 @@ class ShoppingSession
     #[ORM\ManyToOne(inversedBy: 'shoppingSessions')]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
-    private ?string $total = null;
+    #[ORM\Column()]
+    private ?float $total = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -54,9 +54,15 @@ class ShoppingSession
         return $this;
     }
 
-    public function getTotal(): ?string
+    public function getTotal(): ?float
     {
-        return $this->total;
+        $total = 0;
+
+        foreach ($this->getCartItems() as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
     }
 
     public function setTotal(string $total): self

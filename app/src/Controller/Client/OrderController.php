@@ -2,17 +2,24 @@
 
 namespace App\Controller\Client;
 
+use App\Entity\Order\ShoppingSession;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
-    #[Route('/client/order', name: 'app_client_order')]
+    private $em;
+    public function __construct(ManagerRegistry $em)
+    {
+        $this->em = $em;
+    }
+
+    #[Route('/order', name: 'order_show')]
     public function index(): Response
     {
-        return $this->render('client/order/index.html.twig', [
-            'controller_name' => 'OrderController',
-        ]);
+
+        return $this->render('client/order/checkout.html.twig');
     }
 }

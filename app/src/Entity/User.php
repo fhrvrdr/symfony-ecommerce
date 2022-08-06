@@ -220,6 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->shoppingSessions;
     }
 
+
     public function addShoppingSession(ShoppingSession $shoppingSession): self
     {
         if (!$this->shoppingSessions->contains($shoppingSession)) {

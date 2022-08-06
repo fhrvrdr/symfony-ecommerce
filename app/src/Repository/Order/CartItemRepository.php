@@ -21,17 +21,16 @@ class CartItemRepository extends ServiceEntityRepository
         parent::__construct($registry, CartItem::class);
     }
 
-    public function add($shoppingSession, $prodcut): void
+    public function add($shoppingSession, $prodcut, $quantity): void
     {
         $cartItem = new CartItem();
         $cartItem->setSession($shoppingSession);
         $cartItem->setProduct($prodcut);
-        $cartItem->setQuantity(1);
+        $cartItem->setQuantity($quantity);
         $cartItem->setCreatedAt(date_create_immutable());
         $cartItem->setModifiedAt(date_create_immutable());
 
         $this->getEntityManager()->persist($cartItem);
-
         $this->getEntityManager()->flush();
     }
 

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
 class OrderDetails
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,8 +21,6 @@ class OrderDetails
     #[ORM\ManyToOne(inversedBy: 'orderDetails')]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
-    private ?string $total = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -57,17 +56,26 @@ class OrderDetails
         return $this;
     }
 
-    public function getTotal(): ?string
+    /**
+     * Calculates the order total.
+     *
+     * @return float
+     */
+    public function getTotal(): float
     {
-        return $this->total;
+        $total = 0;
+
+        foreach ($this->getOrderItems() as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
     }
 
-    public function setTotal(string $total): self
-    {
-        $this->total = $total;
 
-        return $this;
-    }
+
+
+
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -101,23 +109,28 @@ class OrderDetails
         return $this->orderItems;
     }
 
-    public function addOrderItem(OrderItems $orderItem): self
+    public function addOrderItem(OrderItems $item): self
     {
-        if (!$this->orderItems->contains($orderItem)) {
-            $this->orderItems->add($orderItem);
-            $orderItem->setOrderDetails($this);
+        foreach ($this->getOrderItems() as $existingItem) {
+            // The item already exists, update the quantity
+            if ($existingItem->equals($item)) {
+                $existingItem->setQuantity(
+                    $existingItem->getQuantity() + $item->getQuantity()
+                );
+                return $this;
+            }
         }
+
+        $this->items[] = $item;
+        $item->setOrderDetails($this);
 
         return $this;
     }
 
     public function removeOrderItem(OrderItems $orderItem): self
     {
-        if ($this->orderItems->removeElement($orderItem)) {
-            // set the owning side to null (unless already changed)
-            if ($orderItem->getOrderDetails() === $this) {
-                $orderItem->setOrderDetails(null);
-            }
+        foreach ($this->getOrderItems() as $item) {
+            $this->removeOrderItem($item);
         }
 
         return $this;

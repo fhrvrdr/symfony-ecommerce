@@ -5,6 +5,8 @@ namespace App\Entity\Order;
 use App\Entity\Product\Product;
 use App\Repository\Order\OrderItemsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: OrderItemsRepository::class)]
 class OrderItems
@@ -20,6 +22,9 @@ class OrderItems
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
     private ?Product $product = null;
 
+
+    #[Assert\NotBlank]
+    #[Assert\GreaterThanOrEqual(1)]
     #[ORM\Column]
     private ?int $quantity = null;
 
@@ -97,5 +102,27 @@ class OrderItems
     public function __toString(): string
     {
         return $this->getProduct()->getName();  // or some string field in your Vegetal Entity 
+    }
+
+    /**
+     * Tests if the given item given corresponds to the same order item.
+     *
+     * @param OrderItem $item
+     *
+     * @return bool
+     */
+    public function equals(OrderItems $item): bool
+    {
+        return $this->getProduct()->getId() === $item->getProduct()->getId();
+    }
+
+    /**
+     * Calculates the item total.
+     *
+     * @return float|int
+     */
+    public function getTotal(): float
+    {
+        return $this->getProduct()->getPrice() * $this->getQuantity();
     }
 }

@@ -104,19 +104,21 @@
                
                 <h3>${{product.price}} </h3>
                 <div class="product__details__cart__option">
-                  <div class="quantity">
-                    <div class="pro-qty">
-                      <input type="text" value="1" />
+                {{ form_start(form) }}
+                    <div class="quantity">
+                      {{ form_widget(form.quantity, {
+                          'attr': {
+                              'class': 'pro-qty text-center' ~ (form.quantity.vars.valid ? '' : 'is-invalid')
+                          }
+                      }) }}
                     </div>
+                      {{ form_widget(form.add, {'attr': {'class': 'btn primary-btn'}}) }}
+                    
                   </div>
-                  {% if product.stock <= 0 %}
-                    <a href="#" class="btn primary-btn disabled">add to cart</a>
-                  
-                  {% else %}
-                    <a href="#" class="primary-btn">add to cart</a>
-                  {% endif %}
-                </div>
-                
+                  <div class="invalid-feedback">
+                      {{ form_errors(form.quantity) }}
+                  </div>
+                {{ form_end(form) }}
                 <div class="product__details__last__option">
                   <h5><span>Guaranteed Safe Checkout</span></h5>
                   <img src="img/shop-details/details-payment.png" alt="" />
@@ -151,7 +153,7 @@
                 <div class="tab-content">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel">
                     <div class="product__details__tab__content">
-                      {{ product.description|e('html') }}
+                      {{ product.description|raw }}
                     </div>
                   </div>
                 </div>
