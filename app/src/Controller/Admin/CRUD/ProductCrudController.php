@@ -58,8 +58,8 @@ class ProductCrudController extends AbstractCrudController
             ImageField::new('image_path_2')->setBasePath('images')->setUploadDir('public/images')->setUploadedFileNamePattern('[slug]-[uuid].[extension]'),
             ImageField::new('image_path_3')->setBasePath('images')->setUploadDir('public/images')->setUploadedFileNamePattern('[slug]-[uuid].[extension]'),
 
-            ArrayField::new('category', 'Categories')->onlyOnIndex(),
-            AssociationField::new('category', 'Categories')->hideOnIndex(),
+            ArrayField::new('category', 'Categories')->hideOnForm(),
+            AssociationField::new('category', 'Categories')->onlyOnForms(),
         ];
     }
 

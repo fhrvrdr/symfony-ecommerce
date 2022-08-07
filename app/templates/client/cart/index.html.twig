@@ -1,5 +1,8 @@
 {% extends "client/layouts/app.html.twig" %}
 
+{% block title %}
+    Shopping Cart
+{% endblock %}
 
 {% block body %}
     <!-- Page Preloder -->
@@ -36,34 +39,43 @@
                     <div class="shopping__cart__table">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
                             </thead>
                             <tbody>
-                            {% for item in cartItems %}
+                            {% for cartItem in cartItems %}
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
                                             <img src="img/shopping-cart/cart-1.jpg" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
-                                            <h6>{{item.getProduct.name}}</h6>
-                                            <h5>${{item.getProduct.price}}</h5>
+                                            <h6>{{ cartItem.getProduct.name }}</h6>
+                                            <h5>${{ cartItem.getProduct.price }}</h5>
                                         </div>
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="{{item.getQuantity}}">
+                                            <div class="pro-qty-3">
+                                                <a href="{{ url('drop_cart_item',{ id : cartItem.id }) }}"><span
+                                                            class="fa fa-angle-left dec qtybtn"></span></a>
+                                                <input type="text" value="{{ cartItem.getQuantity }}">
+                                                <a href="{{ url('increase_cart_item',{ id : cartItem.id }) }}"><span
+                                                            class="fa fa-angle-right dec qtybtn"></span></a>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">$ {{item.getProduct.price * item.getQuantity}}</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
+                                    <td class="cart__price">
+                                        $ {{ cartItem.getProduct.price * cartItem.getQuantity }}</td>
+                                    <td class="cart__close"><a
+                                                href="{{ url('delete_cart_item',{ id : cartItem.id }) }}"><i
+                                                    class="fa fa-close"></a></td>
+
+
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -72,13 +84,10 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="{{url('product_list')}}">Continue Shopping</a>
+                                <a href="{{ url('product_list') }}">Continue Shopping</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,11 +102,11 @@
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>${{total}}</span></li>
-                            <li>Discount <span>- ${{discount}}</span></li>
-                            <li>Total <span>${{total - discount}}</span></li>
+                            <li>Subtotal <span>${{ total }}</span></li>
+                            <li>Discount <span>- ${{ discount }}</span></li>
+                            <li>Total <span>${{ total - discount }}</span></li>
                         </ul>
-                        <a href="{{url('order_show')}}" class="primary-btn">Proceed to checkout</a>
+                        <a href="{{ url('show_order') }}" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>
@@ -105,9 +114,16 @@
     </section>
     <!-- Shopping Cart Section End -->
 
-   
-{% include "client/layouts/footer.html.twig" %}
 
+    {% include "client/layouts/footer.html.twig" %}
 
-    
+    <script>
+        const myForm = document.getElementById("quantityForm");
+        document.getElementById("quantitySubmit").addEventListener("click", function () {
+
+            myForm.submit();
+
+        });
+    </script>
+
 {% endblock %}

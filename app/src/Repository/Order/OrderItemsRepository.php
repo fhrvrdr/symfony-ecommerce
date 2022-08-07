@@ -21,13 +21,18 @@ class OrderItemsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderItems::class);
     }
 
-    public function add(OrderItems $entity, bool $flush = false): void
+    public function add($entity, $order): void
     {
-        $this->getEntityManager()->persist($entity);
+        $orderItem = new OrderItems();
+        $orderItem->setProduct($entity->getProduct());
+        $orderItem->setQuantity($entity->getQuantity());
+        $orderItem->setOrderDetails($order);
+        $orderItem->setCreatedAt(date_create_immutable());
+        $orderItem->setModifiedAt(date_create_immutable());
+        
+        $this->getEntityManager()->persist($orderItem);
+        $this->getEntityManager()->flush();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
     public function remove(OrderItems $entity, bool $flush = false): void

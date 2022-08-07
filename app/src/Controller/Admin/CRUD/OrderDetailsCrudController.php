@@ -10,8 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class OrderDetailsCrudController extends AbstractCrudController
@@ -29,7 +31,6 @@ class OrderDetailsCrudController extends AbstractCrudController
         $orderDetails->setModifiedAt(date_create_immutable());
 
         return $orderDetails;
-
     }
 
 
@@ -37,15 +38,11 @@ class OrderDetailsCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('user', 'Customer')->hideOnForm(),
+            AssociationField::new('user', 'Customer')->setCrudController(UserCrudController::class)->hideOnForm(),
             DateField::new('modified_at', 'Order Date')->hideOnForm(),
-            ArrayField::new('orderItems')->onlyOnDetail(),
-            BooleanField::new('status', 'Order Status')->onlyOnIndex()->setDisabled(),
-            BooleanField::new('status', 'Order Status')->hideOnIndex(),
-
-            AssociationField::new('orderItems', 'Items')->onlyOnIndex(),
-
-
+            CollectionField::new('orderItems')->hideOnIndex(),
+            IntegerField::new('totalPrice', 'Price'),
+            BooleanField::new('status', 'Order Status')->renderAsSwitch(),
         ];
     }
 

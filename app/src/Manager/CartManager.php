@@ -3,16 +3,15 @@
 namespace App\Manager;
 
 use App\Entity\Order\ShoppingSession;
-use App\Factory\CartFactory;
 use App\Service\CartService;
 
 class CartManager
 {
 
     private $cartService;
-    public function __construct(CartFactory $cartFactory, CartService $cartService)
+    public function __construct(CartService $cartService)
     {
-        $this->cartFactory = $cartFactory;
+
         $this->cartService = $cartService;
     }
 
@@ -24,5 +23,6 @@ class CartManager
 
     public function resetCurrentCart()
     {
+        $cart = $this->cartService->getCart();
     }
 }

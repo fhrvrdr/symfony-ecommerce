@@ -1,4 +1,3 @@
-
 {% extends "client/layouts/app.html.twig" %}
 
 {% block title %}
@@ -6,42 +5,43 @@
 {% endblock %}
 
 {% block body %}
- 
-  <!-- Page Preloder -->
-  <div id="preloder">
-    <div class="loader"></div>
-  </div>
 
-  {% include "client/layouts/navbar.html.twig" %}
-
-  <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-option">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="breadcrumb__text">
-            <h4>Check Out</h4>
-            <div class="breadcrumb__links">
-              <a href="./index.html">Home</a>
-              <a href="./shop.html">Shop</a>
-              <span>Check Out</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
-  </section>
-  <!-- Breadcrumb Section End -->
 
-  <!-- Checkout Section Begin -->
-  <section class="checkout spad">
-    <div class="container">
-      <div class="checkout__form">
-        <form action="#">
-          <div class="row">
-            <div class="col-lg-8 col-md-6">
+    {% include "client/layouts/navbar.html.twig" %}
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Check Out</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Check Out</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form action="{{ url('create_order') }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('token') }}">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
                             <h6 class="checkout__title">User Details</h6>
-                           <div class="checkout__input">
+                            <div class="checkout__input">
                                 <p>Title<span>*</span></p>
                                 <input type="text" name="title" placeholder="Home">
                             </div>
@@ -55,9 +55,10 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add" name="adress" id="adress">
+                                <input type="text" placeholder="Street Address" class="checkout__input__add"
+                                       name="adress" id="adress">
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col">
                                     <div class="checkout__input">
@@ -65,68 +66,68 @@
                                         <input type="text" name="telephone">
                                     </div>
                                 </div>
-                                
+
                             </div>
-                           
-                            
+
+
                         </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="checkout__order">
-                <h4 class="order__title">Your order</h4>
-                <div class="checkout__order__products">
-                  Product <span>Total</span>
-                </div>
-                <ul class="checkout__total__products">
-                  <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
-                  <li>02. German chocolate <span>$ 170.0</span></li>
-                  <li>03. Sweet autumn <span>$ 170.0</span></li>
-                  <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
-                </ul>
-                <ul class="checkout__total__all">
-                  <li>Subtotal <span>$750.99</span></li>
-                  <li>Total <span>$750.99</span></li>
-                </ul>
-                
-                <p>
-                  Payment Method
-                </p>
-                <div class="checkout__input__checkbox">
-                  <label for="payment">
-                    Online
-                    <input type="radio" id="payment" name="paymentMethod"/>
-                    <span class="checkmark"></span>
-                    
-                  </label>
-                </div>
-                <div class="checkout__input__checkbox">
-                  <label for="paypal">
-                    Pay at the Door
-                    <input type="radio" id="paypal" name="paymentMethod"/>
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <button type="submit" class="site-btn">PLACE ORDER</button>
-              </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4 class="order__title">Your order</h4>
+                                <div class="checkout__order__products">
+                                    Product <span>Total</span>
+                                </div>
+                                <ul class="checkout__total__products">
+                                    {% for item in cartItems %}
+                                        <li>{{ item.getQuantity }} x {{ item.getProduct.name }}
+                                            <span>${{ item.getProduct.price }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                                <ul class="checkout__total__all">
+                                    <li>Discount <span>- ${{ discount }}</span></li>
+                                    <li>Total <span>${{ total - discount }}</span></li>
+                                </ul>
+
+                                <p>
+                                    Payment Method
+                                </p>
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                        Online
+                                        <input type="radio" id="payment" name="paymentMethod"/>
+                                        <span class="checkmark"></span>
+
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        Pay at the Door
+                                        <input type="radio" id="paypal" name="paymentMethod"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-  <!-- Checkout Section End -->
+        </div>
+    </section>
+    <!-- Checkout Section End -->
 
-  {% include "client/layouts/footer.html.twig" %}
+    {% include "client/layouts/footer.html.twig" %}
 
-  <!-- Search Begin -->
-  <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-      <div class="search-close-switch">+</div>
-      <form class="search-model-form">
-        <input type="text" id="search-input" placeholder="Search here....." />
-      </form>
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here....."/>
+            </form>
+        </div>
     </div>
-  </div>
-  <!-- Search End -->
+    <!-- Search End -->
 
 {% endblock %}
 

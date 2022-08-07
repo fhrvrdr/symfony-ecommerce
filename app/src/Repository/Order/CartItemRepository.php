@@ -34,37 +34,29 @@ class CartItemRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function remove(CartItem $entity, bool $flush = false): void
+    public function remove(CartItem $entity): void
     {
         $this->getEntityManager()->remove($entity);
 
-        if ($flush) {
+        $this->getEntityManager()->flush();
+    }
+
+    public function dropItem(CartItem $entity): void
+    {
+        if ($entity->getQuantity() > 1) {
+            $entity->setQuantity($entity->getQuantity() - 1);
+            $this->getEntityManager()->persist($entity);
+            $this->getEntityManager()->flush();
+        } else {
+            $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
         }
     }
 
-    //    /**
-    //     * @return CartItem[] Returns an array of CartItem objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?CartItem
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function increaseItem(CartItem $entity): void
+    {
+        $entity->setQuantity($entity->getQuantity() + 1);
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
 }

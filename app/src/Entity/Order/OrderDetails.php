@@ -34,6 +34,9 @@ class OrderDetails
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\Column]
+    private ?float $totalPrice = null;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -71,10 +74,6 @@ class OrderDetails
 
         return $total;
     }
-
-
-
-
 
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -151,5 +150,17 @@ class OrderDetails
     public function __toString(): string
     {
         return $this->getId();  // or some string field in your Vegetal Entity 
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(float $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
     }
 }

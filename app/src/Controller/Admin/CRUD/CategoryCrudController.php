@@ -18,7 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CategoryCrudController extends AbstractCrudController
 {
-    
+
 
     public static function getEntityFqcn(): string
     {
@@ -47,7 +47,6 @@ class CategoryCrudController extends AbstractCrudController
         $category->setModifiedAt(date_create_immutable());
 
         return $category;
-
     }
 
     public function configureCrud(Crud $crud): Crud

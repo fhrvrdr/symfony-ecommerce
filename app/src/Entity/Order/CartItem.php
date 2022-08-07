@@ -3,6 +3,7 @@
 namespace App\Entity\Order;
 
 use App\Entity\Product\Product;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Order\CartItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,12 +15,14 @@ class CartItem
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'cartItems')]
     private ?ShoppingSession $session = null;
 
     #[ORM\ManyToOne(inversedBy: 'cartItems')]
     private ?Product $product = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $quantity = null;
 

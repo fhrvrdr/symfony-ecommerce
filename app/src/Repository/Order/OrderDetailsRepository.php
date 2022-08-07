@@ -3,6 +3,7 @@
 namespace App\Repository\Order;
 
 use App\Entity\Order\OrderDetails;
+use App\Entity\Order\OrderItems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,18 +17,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OrderDetailsRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, OrderDetails::class);
     }
 
-    public function add(OrderDetails $entity, bool $flush = false): void
+    public function add($cart, $user): void
     {
-        $this->getEntityManager()->persist($entity);
+        $order = new OrderDetails();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $order->setUser($user);
+        $order->setStatus(false);
+        $order->setTotalPrice($cart->getTotal());
+        $order->setCreatedAt(date_create_immutable());
+        $order->setModifiedAt(date_create_immutable());
+
+        $this->getEntityManager()->persist($order);
+        $this->getEntityManager()->flush();
+
+        
     }
 
     public function remove(OrderDetails $entity, bool $flush = false): void

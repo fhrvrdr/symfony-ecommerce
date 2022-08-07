@@ -1,6 +1,4 @@
-{% extends "client/layouts/app.html.twig" %}
 
-{% block body %}
      <!-- Header Section Begin -->
     <header class="header">
       <div class="header__top">
@@ -14,9 +12,12 @@
             <div class="col-lg-6 col-md-5">
               <div class="header__top__right">
                 <div class="header__top__links">
-                  <a href="/login">Sign in</a>
+                  {% if app.user == null %}
+                    <a href="/login">Sign in</a>
+                  {% else %}
+                    <a href="/logout">Sign out</a>
+                  {% endif %}
                 </div>
-                
               </div>
             </div>
           </div>
@@ -51,10 +52,9 @@
               <a href="#" class="search-switch"
                 ><img src="{{ asset('fashion/img/icon/search.png') }}" alt=""
               /></a>
-              <a href="#"
-                ><img src="{{ asset('fashion/img/icon/cart.png') }}" alt="" /> <span>0</span></a
-              >
-              <div class="price">0</div>
+              <a href="{{url('show_cart')}}" style="color:black;"
+                ><img src="{{ asset('fashion/img/icon/cart.png') }}" alt="" />
+              <div class="price" >Cart</a></div>
             </div>
           </div>
         </div>
@@ -62,4 +62,3 @@
       </div>
     </header>
     <!-- Header Section End -->
-{% endblock %}
