@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Order\CartItem;
-use App\Entity\Order\OrderItems;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

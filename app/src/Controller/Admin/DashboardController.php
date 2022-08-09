@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 
-
 use App\Controller\Admin\CRUD\CategoryCrudController;
+use App\Entity\Customer\UserAdress;
 use App\Entity\Order\OrderDetails;
 use App\Entity\Product\Category;
+use App\Entity\Product\Discount;
 use App\Entity\Product\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -43,7 +44,11 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Product', 'fa fa-shop', Product::class),
             MenuItem::section('Order Settings'),
             MenuItem::linkToCrud('Orders', 'fa fa-cart-shopping', OrderDetails::class),
-
+            MenuItem::linkToCrud('Discounts', 'fa fa-percent', Discount::class),
+            MenuItem::section('User'),
+            MenuItem::linkToCrud('User Adresses', 'fa fa-user', UserAdress::class),
         ];
     }
+
+
 }

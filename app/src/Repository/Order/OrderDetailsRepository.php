@@ -23,20 +23,21 @@ class OrderDetailsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderDetails::class);
     }
 
-    public function add($cart, $user): void
+    public function add($cart, $user, $request)
     {
         $order = new OrderDetails();
 
         $order->setUser($user);
         $order->setStatus(false);
         $order->setTotalPrice($cart->getTotal());
+        $order->setPaymentType($request->request->get('payment_type'));
         $order->setCreatedAt(date_create_immutable());
         $order->setModifiedAt(date_create_immutable());
 
         $this->getEntityManager()->persist($order);
         $this->getEntityManager()->flush();
 
-        
+        return $order;
     }
 
     public function remove(OrderDetails $entity, bool $flush = false): void

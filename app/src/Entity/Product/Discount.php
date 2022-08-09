@@ -2,7 +2,7 @@
 
 namespace App\Entity\Product;
 
-use App\Repository\Order\DiscountRepository;
+use App\Repository\Product\DiscountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -22,8 +22,8 @@ class Discount
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
-    private ?string $discount_percent = null;
+    #[ORM\Column()]
+    private ?int $percent = null;
 
     #[ORM\Column]
     private ?bool $active = null;
@@ -36,6 +36,9 @@ class Discount
 
     #[ORM\OneToMany(mappedBy: 'discount', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\ManyToOne(inversedBy: 'discounts')]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -73,12 +76,12 @@ class Discount
 
     public function getDiscountPercent(): ?string
     {
-        return $this->discount_percent;
+        return $this->percent;
     }
 
-    public function setDiscountPercent(string $discount_percent): self
+    public function setDiscountPercent(int $percent): self
     {
-        $this->discount_percent = $discount_percent;
+        $this->percent = $percent;
 
         return $this;
     }
@@ -145,6 +148,18 @@ class Discount
                 $product->setDiscount(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

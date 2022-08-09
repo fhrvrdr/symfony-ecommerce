@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Repository\Order\OrderDetailsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
@@ -36,6 +35,10 @@ class OrderDetails
 
     #[ORM\Column]
     private ?float $totalPrice = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $paymentType = null;
+
 
     public function __construct()
     {
@@ -163,4 +166,18 @@ class OrderDetails
 
         return $this;
     }
+
+    public function getPaymentType(): ?string
+    {
+        return $this->paymentType;
+    }
+
+    public function setPaymentType(string $paymentType): self
+    {
+        $this->paymentType = $paymentType;
+
+        return $this;
+    }
+
+
 }

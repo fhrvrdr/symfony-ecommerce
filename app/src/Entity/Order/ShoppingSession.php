@@ -3,11 +3,13 @@
 namespace App\Entity\Order;
 
 use App\Entity\User;
+use App\Repository\Order\CartItemRepository;
 use App\Repository\Order\ShoppingSessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[ORM\Entity(repositoryClass: ShoppingSessionRepository::class)]
 class ShoppingSession
@@ -31,6 +33,7 @@ class ShoppingSession
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: CartItem::class)]
     private Collection $cartItems;
+
 
     public function __construct()
     {
@@ -114,15 +117,9 @@ class ShoppingSession
         return $this;
     }
 
-    public function removeCartItem(CartItem $cartItem): self
+    public function removeCartItems(): self
     {
-        if ($this->cartItems->removeElement($cartItem)) {
-            // set the owning side to null (unless already changed)
-            if ($cartItem->getSession() === $this) {
-                $cartItem->setSession(null);
-            }
-        }
-
+        
         return $this;
     }
 }

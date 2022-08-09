@@ -84,17 +84,23 @@
                                     {% endfor %}
                                 </ul>
                                 <ul class="checkout__total__all">
-                                    <li>Discount <span>- ${{ discount }}</span></li>
-                                    <li>Total <span>${{ total - discount }}</span></li>
+                                    {% if discount != null %}
+                                        <li>Discount <span>- %{{ discount.getDiscountPercent }}</span></li>
+                                        <li>Total <span>${{ total * (discount.getDiscountPercent / 100) }}</span>
+                                        </li>
+                                    {% else %}
+                                        <li>Total <span>${{ total }}</span></li>
+                                    {% endif %}
                                 </ul>
 
                                 <p>
                                     Payment Method
                                 </p>
+
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Online
-                                        <input type="radio" id="payment" name="paymentMethod"/>
+                                        <input type="radio" id="payment" name="payment_type" value="online" disabled/>
                                         <span class="checkmark"></span>
 
                                     </label>
@@ -102,10 +108,12 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
                                         Pay at the Door
-                                        <input type="radio" id="paypal" name="paymentMethod"/>
+                                        <input type="radio" id="paypal" name="payment_type" value="door"
+                                               checked/>
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
+
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>

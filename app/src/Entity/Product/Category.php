@@ -34,10 +34,14 @@ class Category
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $modified_at = null;
 
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Discount::class)]
+    private Collection $discounts;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->discounts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +115,36 @@ class Category
     public function setModifiedAt(\DateTimeImmutable $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Discount>
+     */
+    public function getDiscounts(): Collection
+    {
+        return $this->discounts;
+    }
+
+    public function addDiscount(Discount $discount): self
+    {
+        if (!$this->discounts->contains($discount)) {
+            $this->discounts->add($discount);
+            $discount->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscount(Discount $discount): self
+    {
+        if ($this->discounts->removeElement($discount)) {
+            // set the owning side to null (unless already changed)
+            if ($discount->getCategory() === $this) {
+                $discount->setCategory(null);
+            }
+        }
 
         return $this;
     }

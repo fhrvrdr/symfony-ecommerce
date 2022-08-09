@@ -21,6 +21,7 @@ class CategoryController extends AbstractController
     #[Route('/category/{name}', name: 'app_category')]
     public function index($name): Response
     {
+
         $category = $this->entityManager->getRepository(Category::class)->findOneBy([
             'name' => $name
         ]);

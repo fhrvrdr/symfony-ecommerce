@@ -12,6 +12,15 @@ services:
       - "4306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8082:80
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: 123456
   php:
     container_name: php
     build:

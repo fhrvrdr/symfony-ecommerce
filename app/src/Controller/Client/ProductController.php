@@ -6,7 +6,7 @@ use App\Entity\Product\Category;
 use App\Entity\Product\Product;
 use App\Form\AddToCartType;
 use App\Repository\Order\CartItemRepository;
-use App\Service\CartService;
+use App\Manager\CartManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private $entityManager;
-    private $cartService;
-    public function __construct(ManagerRegistry $entityManager, CartService $cartService)
+    private $cartManager;
+
+    public function __construct(ManagerRegistry $entityManager, CartManager $cartManager)
     {
         $this->entityManager = $entityManager;
-        $this->cartService = $cartService;
+        $this->cartManager = $cartManager;
     }
 
     #[Route('/', name: 'product_list')]
@@ -41,7 +42,7 @@ class ProductController extends AbstractController
             'slug' => $slug
         ]);
 
-        $cart = $this->cartService->getCart();
+        $cart = $this->cartManager->getCart();
         $form = $this->createForm(AddToCartType::class);
         $form->handleRequest($request);
 
@@ -49,7 +50,7 @@ class ProductController extends AbstractController
             $quantity = $form->get('quantity')->getData();
             $cartItemRepository->add($cart, $product, $quantity);
 
-            return $this->redirectToRoute('product_show', ['slug' => $product->getSlug()]);
+            return $this->redirectToRoute('show_cart');
         }
 
 

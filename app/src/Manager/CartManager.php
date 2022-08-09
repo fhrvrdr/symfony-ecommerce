@@ -2,27 +2,43 @@
 
 namespace App\Manager;
 
-use App\Entity\Order\ShoppingSession;
-use App\Service\CartService;
+
+use App\Repository\Order\CartItemRepository;
+use App\Repository\Order\ShoppingSessionRepository;
+use Symfony\Component\Security\Core\Security;
 
 class CartManager
 {
+    private $shoppingSessionRepository;
+    private $security;
+    private $cartItemRepository;
 
-    private $cartService;
-    public function __construct(CartService $cartService)
+    public function __construct(ShoppingSessionRepository $shoppingSessionRepository, Security $security, CartItemRepository $cartItemRepository)
     {
-
-        $this->cartService = $cartService;
+        $this->shoppingSessionRepository = $shoppingSessionRepository;
+        $this->security = $security;
+        $this->cartItemRepository = $cartItemRepository;
     }
 
-    public function getCurrentCart(): ShoppingSession
+    public function setCart()
     {
-        $cart = $this->cartService->getCart();
+        $this->shoppingSessionRepository->add($this->security->getUser());
+    }
+
+    public function getCart()
+    {
+        $cart = $this->shoppingSessionRepository->findOneBy(['user' => $this->security->getUser()]);
         return $cart;
     }
 
-    public function resetCurrentCart()
+    public function resetCart()
     {
-        $cart = $this->cartService->getCart();
+        $cart = $this->getCart();
+
+        foreach ($cart->getCartItems() as $item) {
+            $product = $item->getProduct();
+            $product->setStock($product->getStock() - $item->getQuantity());
+            $this->cartItemRepository->remove($item);
+        }
     }
 }

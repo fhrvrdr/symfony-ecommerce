@@ -3,23 +3,24 @@
 namespace App\EventListener;
 
 
-use App\Service\CartService;
+use App\Manager\CartManager;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener
 {
 
-    private $cartService;
-    public function __construct(CartService $cartService)
+    private $cartManager;
+
+    public function __construct(CartManager $cartManager)
     {
-        $this->cartService = $cartService;
+        $this->cartManager = $cartManager;
     }
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
-        if ($this->cartService->getCart() == null) {
-            $this->cartService->setCart();
+        if ($this->cartManager->getCart() == null) {
+            $this->cartManager->setCart();
         }
     }
 }
