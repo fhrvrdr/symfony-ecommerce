@@ -4,12 +4,18 @@ Patika.dev - Enuygun PHP Developer Bootcamp bitirme projesi. Bu proje bir e-tica
 
 ## Dokümantasyon
 
-* [Kullanılan Teknolojiler](#)
-* [Proje Gereksinimleri](#)
-* [Proje Çözümleri](#)
-* [Sistemdeki Roller](#)
+* [Gereksinimler](#gereksinimler)
+* [Kullanılan Teknolojiler](#kullanilan-teknolojiler)
+* [Proje Gereksinimleri](#proje-gereksinimleri)
+* [Proje Çözümleri](#proje-cozumleri)
+* [Sistemdeki Roller](#sistemdeki-roller)
 * [Kurulum](#kurulum)
-* [Konfigürasyon](#)
+* [Konfigürasyon](#konfigurasyon)
+
+## Gereksinimler
+* Docker
+* npm veya yarn
+
 
 ## Kullanılan Teknolojiler
 
@@ -18,6 +24,8 @@ Patika.dev - Enuygun PHP Developer Bootcamp bitirme projesi. Bu proje bir e-tica
 * EasyAdmin Bundle
 * MySQL (8.0)
 * Docker
+
+
 
 ## Proje Gereksinimleri
 
@@ -109,7 +117,7 @@ Docker içerisinden php terminali açın ve bağımlılıkları indirin:
 composer install
 ```
 
-Yarn ile node_modules çekme ve encore build etme
+symfony-console/app klasörü içerisine aşağıdaki komutları çalıştırın:
 
 ```bash
 yarn install
