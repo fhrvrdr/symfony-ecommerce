@@ -2,15 +2,6 @@
 
 Patika.dev - Enuygun PHP Developer Bootcamp bitirme projesi. Bu proje bir e-ticaret projesidir.
 
-## Dokümantasyon
-
-* [Gereksinimler](#gereksinimler)
-* [Kullanılan Teknolojiler](#kullanilan-teknolojiler)
-* [Proje Gereksinimleri](#proje-gereksinimleri)
-* [Proje Çözümleri](#proje-çözumleri)
-* [Sistemdeki Roller](#sistemdeki-roller)
-* [Kurulum](#kurulum)
-* [Konfigürasyon](#konfigurasyon)
 
 ## Gereksinimler
 * Docker
