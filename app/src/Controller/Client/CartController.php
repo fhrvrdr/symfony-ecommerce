@@ -31,7 +31,7 @@ class CartController extends AbstractController
     }
 
 
-    #[Route('/shop/cart/{id}', name: 'delete_cart_item', methods: ['DELETE'])]
+    #[Route('/shop/cart/{id}', name: 'delete_cart_item')]
     public function removeItem($id)
     {
         $cartItem = $this->cartItemRepository->find($id);

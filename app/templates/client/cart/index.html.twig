@@ -70,14 +70,10 @@
                                     <td class="cart__price">
                                         $ {{ cartItem.getProduct.price * cartItem.getQuantity }}</td>
                                     <td class="cart__close">
-                                        <form action="{{ url('delete_cart_item',{ id : cartItem.id }) }}" method="post"
-                                              id="delete_form">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                                            <a href="javascript:{}"
-                                               onclick="document.getElementById('delete_form').submit(); return false;"
-                                               type="submit"><i class="fa fa-close"></i></a>
-                                        </form>
+
+                                        <a href="{{ url('delete_cart_item',{ id : cartItem.id }) }}"
+                                           type="submit"><i class="fa fa-close"></i></a>
+
                                     </td>
                                 </tr>
                             {% endfor %}

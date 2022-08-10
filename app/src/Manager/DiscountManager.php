@@ -29,6 +29,11 @@ class DiscountManager
             }
         }
 
+        $cartItems2 = [];
+        foreach ($cart->getCartItems() as $item) {
+            array_push($cartItems2, $item);
+        }
+
 
         $counter = 0;
         foreach ($cartItems as $item) {
@@ -38,17 +43,19 @@ class DiscountManager
         $price = [];
         if ($counter >= 3) {
             foreach ($cartItems as $item) {
-                if ($item->getProduct()->getCategory() == $discount->getCategory()) {
-                    array_push($price, $item->getProduct()->getPrice());
+                foreach ($item->getProduct()->getCategory() as $category) {
+                    if ($category === $discount->getCategory()) {
+                        array_push($price, $item->getProduct()->getPrice());
+                    }
                 }
-                // Üstteki çalışmazsa eski hali alttaki
-                //array_push($price, $item->getProduct()->getPrice());
+
             }
             return min($price);
         } else if (count($cart->getCartItems()) == 2) {
-            foreach ($cartItems as $item) {
+            foreach ($cartItems2 as $item) {
                 array_push($price, $item->getProduct()->getPrice());
             }
+            
             $discount = min($price) / 2;
             return $discount;
         }
