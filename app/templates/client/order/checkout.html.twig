@@ -36,34 +36,36 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="{{ url('create_order') }}" method="post">
+                <form action="{{ path('create_order', {'discount':discount}) }}" method="post">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('token') }}">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <h6 class="checkout__title">User Details</h6>
                             <div class="checkout__input">
                                 <p>Title<span>*</span></p>
-                                <input type="text" name="title" placeholder="Home">
+                                <input type="text" name="title" placeholder="Home" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text" name="city">
+                                <input type="text" name="city" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Country/State<span>*</span></p>
-                                <input type="text" name="country">
+                                <input type="text" name="country" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" class="checkout__input__add"
-                                       name="adress" id="adress">
+                                       name="adress" id="adress" required>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text" name="telephone">
+                                        <input type="text" name="telephone"
+                                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                               required>
                                     </div>
                                 </div>
 
@@ -85,8 +87,8 @@
                                 </ul>
                                 <ul class="checkout__total__all">
                                     {% if discount != null %}
-                                        <li>Discount <span>- %{{ discount.getDiscountPercent }}</span></li>
-                                        <li>Total <span>${{ total * (discount.getDiscountPercent / 100) }}</span>
+                                        <li>Discount <span>- ${{ discount }}</span></li>
+                                        <li>Total <span>${{ total - discount }}</span>
                                         </li>
                                     {% else %}
                                         <li>Total <span>${{ total }}</span></li>
@@ -126,16 +128,8 @@
 
     {% include "client/layouts/footer.html.twig" %}
 
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here....."/>
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
+
+
 
 {% endblock %}
 

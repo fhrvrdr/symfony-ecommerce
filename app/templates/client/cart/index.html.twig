@@ -61,21 +61,24 @@
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <div class="pro-qty-3">
-                                                <a href="{{ url('drop_cart_item',{ id : cartItem.id }) }}"><span
-                                                            class="fa fa-angle-left dec qtybtn"></span></a>
-                                                <input type="text" value="{{ cartItem.getQuantity }}">
-                                                <a href="{{ url('increase_cart_item',{ id : cartItem.id }) }}"><span
-                                                            class="fa fa-angle-right dec qtybtn"></span></a>
+
+                                                <input type="text" value="{{ cartItem.getQuantity }}" disabled>
+
                                             </div>
                                         </div>
                                     </td>
                                     <td class="cart__price">
                                         $ {{ cartItem.getProduct.price * cartItem.getQuantity }}</td>
-                                    <td class="cart__close"><a
-                                                href="{{ url('delete_cart_item',{ id : cartItem.id }) }}"><i
-                                                    class="fa fa-close"></a></td>
-
-
+                                    <td class="cart__close">
+                                        <form action="{{ url('delete_cart_item',{ id : cartItem.id }) }}" method="post"
+                                              id="delete_form">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                                            <a href="javascript:{}"
+                                               onclick="document.getElementById('delete_form').submit(); return false;"
+                                               type="submit"><i class="fa fa-close"></i></a>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -92,18 +95,22 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <h6>{{ discount }}</h6>
-                    </div>
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
                             <li>Subtotal <span>${{ total }}</span></li>
-                            <li>Discount <span>- ${{ discount }}</span></li>
-                            <li>Total <span>${{ total - discount }}</span></li>
+                            <li>Total <span>${{ total }}</span></li>
                         </ul>
-                        <a href="{{ url('show_order') }}" class="primary-btn">Proceed to checkout</a>
+                        {% if cartItems is empty %}
+                            <a class="primary-btn text-muted">Proceed to checkout</a>
+                            <p class="pt-1 text-danger text-center">The shopping cart is empty. Please add product to
+                                cart.</p>
+
+                        {% else %}
+                            <a href="{{ url('show_order') }}" class="primary-btn ">Proceed to checkout</a>
+
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

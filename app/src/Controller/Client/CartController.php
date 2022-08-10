@@ -27,27 +27,11 @@ class CartController extends AbstractController
         $cart = $this->cartManager->getCart();
         $totalPrice = $cart->getTotal();
         $cartItems = $cart->getCartItems();
-        $discount = 100;
-        return $this->render('client/cart/index.html.twig', ['total' => $totalPrice, 'cartItems' => $cartItems, 'discount' => $discount]);
+        return $this->render('client/cart/index.html.twig', ['total' => $totalPrice, 'cartItems' => $cartItems]);
     }
 
-    #[Route('/shop/cart/{id}/di', name: 'drop_cart_item')]
-    public function dropItem($id)
-    {
-        $cartItem = $this->cartItemRepository->find($id);
-        $this->cartItemRepository->dropItem($cartItem);
-        return $this->redirectToRoute('show_cart');
-    }
 
-    #[Route('/shop/cart/{id}/ii', name: 'increase_cart_item')]
-    public function increaseItem($id)
-    {
-        $cartItem = $this->cartItemRepository->find($id);
-        $this->cartItemRepository->increaseItem($cartItem);
-        return $this->redirectToRoute('show_cart');
-    }
-
-    #[Route('/shop/cart/{id}/rmi', name: 'delete_cart_item')]
+    #[Route('/shop/cart/{id}', name: 'delete_cart_item', methods: ['DELETE'])]
     public function removeItem($id)
     {
         $cartItem = $this->cartItemRepository->find($id);

@@ -21,9 +21,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            {% for category in product.category %}
-                                <a href="./index.html">{{ category.name }}</a>
-                            {% endfor %}
                             <span>{{ product.name }}</span>
                         </div>
                     </div>
@@ -133,7 +130,7 @@
                                 <li>
                                     <span>Categories:</span>
                                     {% for category in product.category %}
-                                        <a href="">{{ category }} </a>
+                                        <a href="/category/{{ category.name }}">{{ category }} </a>
                                     {% endfor %}
                                 </li>
                             </ul>

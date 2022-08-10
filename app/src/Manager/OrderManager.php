@@ -9,24 +9,24 @@ use Symfony\Component\Security\Core\Security;
 
 class OrderManager
 {
-    private $cartService, $security, $orderDetailsRepository, $orderItemsRepository;
+    private $cartManager, $security, $orderDetailsRepository, $orderItemsRepository;
 
-    public function __construct(CartManager $cartService, Security $security, OrderDetailsRepository $orderDetailsRepository, OrderItemsRepository $orderItemsRepository)
+    public function __construct(CartManager $cartManager, Security $security, OrderDetailsRepository $orderDetailsRepository, OrderItemsRepository $orderItemsRepository)
     {
         $this->security = $security;
-        $this->cartService = $cartService;
+        $this->cartManager = $cartManager;
         $this->orderDetailsRepository = $orderDetailsRepository;
         $this->orderItemsRepository = $orderItemsRepository;
     }
 
-    public function createOrder(Request $request): void
+    public function createOrder(Request $request, $discount): void
     {
-        $cart = $this->cartService->getCart();
+        $cart = $this->cartManager->getCart();
         $user = $this->security->getUser();
-        $order = $this->orderDetailsRepository->add($cart, $user, $request);
+        $order = $this->orderDetailsRepository->add($cart, $user, $request, $discount);
         foreach ($cart->getCartItems() as $item) {
             $this->orderItemsRepository->add($item, $order);
         }
-        $this->cartService->resetCart();
+        $this->cartManager->resetCart();
     }
 }

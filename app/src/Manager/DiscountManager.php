@@ -19,22 +19,34 @@ class DiscountManager
 
     public function discount(ShoppingSession $cart)
     {
-        $categories[] = null;
+        $cartItems = [];
         $discount = $this->discountRepository->findOneBy(['name' => '3 to 1']);
         foreach ($cart->getCartItems() as $item) {
             foreach ($item->getProduct()->getCategory() as $category) {
                 if ($category === $discount->getCategory()) {
-                    $categories[] = array_fill(0, $item->getQuantity(), $category);
+                    array_push($cartItems, $item);
                 }
             }
         }
 
 
-        if (count($categories) >= 3) {
-            $discount = $this->discountRepository->findOneBy(['name' => '3 to 1']);
-            return $discount;
+        $counter = 0;
+        foreach ($cartItems as $item) {
+            $counter += $item->getQuantity();
+        }
+
+        $price = [];
+        if ($counter >= 3) {
+            foreach ($cartItems as $item) {
+                array_push($price, $item->getProduct()->getPrice());
+
+            }
+            return min($price);
         } else if (count($cart->getCartItems()) == 2) {
-            $discount = $this->discountRepository->findOneBy(['name' => 'Fifty Percent']);
+            foreach ($cartItems as $item) {
+                array_push($price, $item->getProduct()->getPrice());
+            }
+            $discount = min($price) / 2;
             return $discount;
         }
     }

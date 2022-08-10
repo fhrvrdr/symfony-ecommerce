@@ -23,13 +23,13 @@ class OrderDetailsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderDetails::class);
     }
 
-    public function add($cart, $user, $request)
+    public function add($cart, $user, $request, $discount)
     {
         $order = new OrderDetails();
 
         $order->setUser($user);
         $order->setStatus(false);
-        $order->setTotalPrice($cart->getTotal());
+        $order->setTotalPrice($cart->getTotal() - $discount);
         $order->setPaymentType($request->request->get('payment_type'));
         $order->setCreatedAt(date_create_immutable());
         $order->setModifiedAt(date_create_immutable());
