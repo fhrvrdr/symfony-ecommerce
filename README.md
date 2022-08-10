@@ -121,6 +121,7 @@ yarn install
 yarn encore dev
 ```
 
+> Kurulum tamam! localhost:8080/ üzerinden anasayfaya , localhost:8080/admin üzerinden admin panele erişebilirsiniz.
 ## Konfigürasyon
 
 PhpMyAdmin sayfasına giriş:
