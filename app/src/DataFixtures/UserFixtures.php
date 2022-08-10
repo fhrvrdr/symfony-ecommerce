@@ -28,6 +28,18 @@ class UserFixtures extends Fixture
         $user->setModifiedAt(date_create_immutable());
 
         $manager->persist($user);
+
+        $user2 = new User();
+        $user2->setEmail('customer@example.com');
+        $password = $this->hasher->hashPassword($user, 'customer');
+        $user2->setPassword($password);
+        $user2->setName('Customer');
+        $user2->setSurname('Customer');
+        $user2->setCreatedAt(date_create_immutable());
+        $user2->setModifiedAt(date_create_immutable());
+        $manager->persist($user2);
+
+
         $manager->flush();
     }
 }

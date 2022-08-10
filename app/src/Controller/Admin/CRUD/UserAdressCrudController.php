@@ -4,6 +4,7 @@ namespace App\Controller\Admin\CRUD;
 
 use App\Entity\Customer\UserAdress;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -30,6 +31,7 @@ class UserAdressCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id', 'ID')->hideOnForm(),
+            AssociationField::new('user', 'User'),
             TextField::new('title', 'Title'),
             TextField::new('city', 'City'),
             TextField::new('country', 'Country'),

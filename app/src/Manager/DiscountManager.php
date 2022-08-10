@@ -38,8 +38,11 @@ class DiscountManager
         $price = [];
         if ($counter >= 3) {
             foreach ($cartItems as $item) {
-                array_push($price, $item->getProduct()->getPrice());
-
+                if ($item->getProduct()->getCategory() == $discount->getCategory()) {
+                    array_push($price, $item->getProduct()->getPrice());
+                }
+                // Üstteki çalışmazsa eski hali alttaki
+                //array_push($price, $item->getProduct()->getPrice());
             }
             return min($price);
         } else if (count($cart->getCartItems()) == 2) {
