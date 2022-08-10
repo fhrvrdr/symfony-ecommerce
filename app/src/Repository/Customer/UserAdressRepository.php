@@ -6,6 +6,7 @@ use App\Entity\Customer\UserAdress;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,40 +19,32 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserAdressRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         parent::__construct($registry, UserAdress::class);
+        $this->logger = $logger;
     }
 
     public function add($request, $user): void
     {
-        $adress = new UserAdress();
-        $adress->setUser($user);
-        $adress->setAdress($request->request->get('adress'));
-        $adress->setCity($request->request->get('city'));
-        $adress->setCountry($request->request->get('country'));
-        $adress->setTitle($request->request->get('title'));
-        $adress->setTelephone($request->request->get('telephone'));
-        $adress->setCreatedAt(date_create_immutable());
-        $adress->setModifiedAt(date_create_immutable());
+        try {
+            $adress = new UserAdress();
+            $adress->setUser($user);
+            $adress->setAdress($request->request->get('adress'));
+            $adress->setCity($request->request->get('city'));
+            $adress->setCountry($request->request->get('country'));
+            $adress->setTitle($request->request->get('title'));
+            $adress->setTelephone($request->request->get('telephone'));
+            $adress->setCreatedAt(date_create_immutable());
+            $adress->setModifiedAt(date_create_immutable());
 
-        $this->getEntityManager()->persist($adress);
-        $this->getEntityManager()->flush();
-    }
+            $this->getEntityManager()->persist($adress);
+            $this->getEntityManager()->flush();
+        }catch (\Exception $e){
+            $this->logger->error('Kullanıcı adresi eklenirken hata ile karşılaşıldı. Hata: '.$e->getMessage());
+        }
 
-    public function update($request, $adress): void
-    {
-
-        $adress->setAdress($request->request->get('adress'));
-        $adress->setCity($request->request->get('city'));
-        $adress->setCountry($request->request->get('country'));
-        $adress->setTitle($request->request->get('title'));
-        $adress->setTelephone($request->request->get('telephone'));
-        $adress->setCreatedAt(date_create_immutable());
-        $adress->setModifiedAt(date_create_immutable());
-
-        $this->getEntityManager()->persist($adress);
-        $this->getEntityManager()->flush();
     }
 
     public function remove(UserAdress $entity, bool $flush = false): void

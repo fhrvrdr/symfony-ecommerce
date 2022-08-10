@@ -5,6 +5,7 @@ namespace App\Repository\Order;
 use App\Entity\Order\ShoppingSession;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 /**
  * @extends ServiceEntityRepository<ShoppingSession>
@@ -16,21 +17,29 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ShoppingSessionRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry,LoggerInterface $logger)
     {
         parent::__construct($registry, ShoppingSession::class);
+        $this->logger = $logger;
     }
 
     public function add($user): void
     {
-        $shoppingSession = new ShoppingSession();
-        $shoppingSession->setUser($user);
-        $shoppingSession->setTotal(0);
-        $shoppingSession->setCreatedAt(date_create_immutable());
-        $shoppingSession->setModifiedAt(date_create_immutable());
+        try {
+            $shoppingSession = new ShoppingSession();
+            $shoppingSession->setUser($user);
+            $shoppingSession->setTotal(0);
+            $shoppingSession->setCreatedAt(date_create_immutable());
+            $shoppingSession->setModifiedAt(date_create_immutable());
 
-        $this->getEntityManager()->persist($shoppingSession);
-        $this->getEntityManager()->flush();
+            $this->getEntityManager()->persist($shoppingSession);
+            $this->getEntityManager()->flush();
+        }catch (\Exception $e){
+            $this->logger->error('Sepet Oluşturulurken hata ile karşılaşıldı. Hata: ' . $e->getMessage());
+        }
+
+
     }
 
 

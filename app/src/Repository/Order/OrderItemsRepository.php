@@ -5,6 +5,7 @@ namespace App\Repository\Order;
 use App\Entity\Order\OrderItems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 /**
  * @extends ServiceEntityRepository<OrderItems>
@@ -16,22 +17,29 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OrderItemsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry,LoggerInterface $logger)
     {
         parent::__construct($registry, OrderItems::class);
+        $this->logger = $logger;
     }
 
     public function add($entity, $order): void
     {
-        $orderItem = new OrderItems();
-        $orderItem->setProduct($entity->getProduct());
-        $orderItem->setQuantity($entity->getQuantity());
-        $orderItem->setOrderDetails($order);
-        $orderItem->setCreatedAt(date_create_immutable());
-        $orderItem->setModifiedAt(date_create_immutable());
-        
-        $this->getEntityManager()->persist($orderItem);
-        $this->getEntityManager()->flush();
+        try {
+            $orderItem = new OrderItems();
+            $orderItem->setProduct($entity->getProduct());
+            $orderItem->setQuantity($entity->getQuantity());
+            $orderItem->setOrderDetails($order);
+            $orderItem->setCreatedAt(date_create_immutable());
+            $orderItem->setModifiedAt(date_create_immutable());
+
+            $this->getEntityManager()->persist($orderItem);
+            $this->getEntityManager()->flush();
+        }catch (\Exception $e){
+            $this->logger->error('Siparişe ürün eklenirken hata ile karşılaşıldı. Hata: ' . $e->getMessage());
+        }
+
 
     }
 

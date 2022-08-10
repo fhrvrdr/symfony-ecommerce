@@ -6,6 +6,7 @@ use App\Entity\Order\OrderDetails;
 use App\Entity\Order\OrderItems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 /**
  * @extends ServiceEntityRepository<OrderDetails>
@@ -17,27 +18,33 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OrderDetailsRepository extends ServiceEntityRepository
 {
-
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry,LoggerInterface $logger)
     {
         parent::__construct($registry, OrderDetails::class);
+        $this->logger = $logger;
     }
 
     public function add($cart, $user, $request, $discount)
     {
-        $order = new OrderDetails();
+        try {
+            $order = new OrderDetails();
 
-        $order->setUser($user);
-        $order->setStatus(false);
-        $order->setTotalPrice($cart->getTotal() - $discount);
-        $order->setPaymentType($request->request->get('payment_type'));
-        $order->setCreatedAt(date_create_immutable());
-        $order->setModifiedAt(date_create_immutable());
+            $order->setUser($user);
+            $order->setStatus(false);
+            $order->setTotalPrice($cart->getTotal() - $discount);
+            $order->setPaymentType($request->request->get('payment_type'));
+            $order->setCreatedAt(date_create_immutable());
+            $order->setModifiedAt(date_create_immutable());
 
-        $this->getEntityManager()->persist($order);
-        $this->getEntityManager()->flush();
+            $this->getEntityManager()->persist($order);
+            $this->getEntityManager()->flush();
 
-        return $order;
+            return $order;
+        }catch (\Exception $e){
+            $this->logger->error('Sipariş oluşturulurken hata ile karşılaşıldı. Hata: ' . $e->getMessage());
+        }
+
     }
 
     public function remove(OrderDetails $entity, bool $flush = false): void
