@@ -12,7 +12,6 @@ Patika.dev - Enuygun PHP Developer Bootcamp bitirme projesi. Bu proje bir e-tica
 
 ## Gereksinimler
 * Docker
-* npm veya yarn
 
 
 ## Kullanılan Teknolojiler
@@ -115,7 +114,7 @@ Docker içerisinden php terminali açın ve bağımlılıkları indirin:
 composer install
 ```
 
-symfony-console/app klasörü içerisine aşağıdaki komutları çalıştırın:
+Docker içerisinden php terminali açın ve aşağıdaki yarn komutlarını girin:
 
 ```bash
 yarn install
@@ -124,7 +123,7 @@ yarn encore dev
 
 ## Konfigürasyon
 
-PhpMyAdmin sayfasına giriş yapın:
+PhpMyAdmin sayfasına giriş:
 
 ```bash
 localhost:8082
@@ -132,5 +131,5 @@ user:root
 password:123456
 ```
 
-PhpMyAdmin üst panelden içe aktar kısmından veritabanı dosyasını import edin.
+
 
