@@ -7,8 +7,7 @@ RUN apt update \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip \
-    && apt install -y curl \
-
+    && apt install -y curl
 
 WORKDIR /var/www/symfony_docker
 

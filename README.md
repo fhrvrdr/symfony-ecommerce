@@ -109,6 +109,13 @@ Docker içerisinden php terminali açın ve bağımlılıkları indirin:
 composer install
 ```
 
+Yarn ile node_modules çekme ve encore build etme
+
+```bash
+yarn install
+yarn encore dev
+```
+
 ## Konfigürasyon
 
 PhpMyAdmin sayfasına giriş yapın:
