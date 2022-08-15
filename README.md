@@ -132,5 +132,6 @@ user:root
 password:123456
 ```
 
+PhpMyAdmin panelinde bulunan import seçeneği içerisinden 'database.sql' dosyasını seçip içeri aktarın. Veritabanı kullanıma hazır!
 
 
