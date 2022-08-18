@@ -16,5 +16,5 @@ RUN rm -rf /var/lib/apt/lists/ && curl -fsSL https://deb.nodesource.com/setup_16
 RUN apt-get install nodejs -y
 RUN corepack enable
 
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+RUN curl -1sLf https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh | bash
+RUN apt install symfony-cli
